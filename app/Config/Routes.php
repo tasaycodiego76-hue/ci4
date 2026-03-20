@@ -30,6 +30,9 @@ $routes->get('/productos', 'Producto::index');
 $routes->get('/productos/registrar', 'Producto::create');
 $routes->post('/productos/guardar', 'Producto::registrarProducto');
 $routes->get('/productos/eliminar/(:num)', 'Producto::eliminar/$1');
+$routes->get('/productos/buscar/', 'Producto::buscar');
+$routes->get('productos/buscar/(:num)', 'Producto::buscar/$1');
+$routes->post('/productos/actualizar', 'Producto::actualizar');
 
 $routes->get('/proveedores', 'Proveedor::index');
 $routes->get('/proveedores/registrar', 'Proveedor::create');

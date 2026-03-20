@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Models\ProductoModel;
+use CodeIgniter\HTTP\RedirectResponse;
 
 class Producto extends BaseController
 {
@@ -28,6 +29,35 @@ class Producto extends BaseController
 
         return view('Modulos/productos/registrar', $data);
     }
+
+    public function buscar(int $id = null)
+{
+    $cliente = new ProductoModel();
+    $registro = $cliente->find($id);
+
+    $data = [
+        'header'   => view(name: 'Partials/header'),
+        'registro' => $registro,
+        'footer'   => view(name: 'Partials/footer'),
+    ];
+
+    return view('Modulos/productos/actualizar', $data);
+}
+
+public function actualizar(): RedirectResponse
+{
+    $cliente = new ProductoModel();
+
+    $cliente->update($this->request->getPost('idproducto'), [
+        'tipo'        => $this->request->getPost('tipo'),
+        'descripcion' => $this->request->getPost('descripcion'),
+        'precio'      => $this->request->getPost('precio'),
+        'stock'       => $this->request->getPost('stock'),
+    ]);
+
+    return redirect()->to('/productos');
+}
+
 
     public function registrarProducto()
     {

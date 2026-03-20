@@ -30,7 +30,7 @@
             </div>
 
             <button type="submit" class="btn btn-primary">Actualizar</button>
-            <button type="reset" class="btn btn-secondary">Cancelar</button>
+            <a href="<?= base_url('clientes') ?>" class="btn btn-secondary">Cancelar</a>
 
         </form>
     </div>

@@ -42,20 +42,33 @@ class Cliente extends BaseController
         return view('Modulos/clientes/registrar', $data);
     }
 
-    public function buscar(int $id = null)
-    {
-        $cliente = new ClienteModel();
-        $registro = $cliente->find($id);
+public function buscar(int $id = null)
+{
+    $cliente = new ClienteModel();
+    $registro = $cliente->find($id);
 
-        $data = [
-            'header' => view(name: 'Partials/header'),
-            'registro' => $registro,
-            'footer' => view(name: 'Partials/footer'),
-        ];
+    $data = [
+        'header'   => view(name: 'Partials/header'),
+        'registro' => $registro,
+        'footer'   => view(name: 'Partials/footer'),
+    ];
 
-        return view('Modulos/clientes/actualizar', $data);
-    }
+    return view('Modulos/clientes/actualizar', $data);
+}
 
+public function actualizar(): RedirectResponse
+{
+    $cliente = new ClienteModel();
+
+    $cliente->update($this->request->getPost('idcliente'), [
+        'apellidos' => $this->request->getPost('apellidos'),
+        'nombres'   => $this->request->getPost('nombres'),
+        'dni'       => $this->request->getPost('dni'),
+        'telefono'  => $this->request->getPost('telefono'),
+    ]);
+
+    return redirect()->to('/clientes');
+}
 
 
     /**
